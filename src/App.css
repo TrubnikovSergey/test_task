@@ -1,0 +1,13 @@
+body{
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  background: rgb(176, 176, 176);
+}
+
+#root {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+}
+

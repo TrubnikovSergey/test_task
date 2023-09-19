@@ -1,0 +1,7 @@
+{
+    "categories":[
+        {"id":1, "title":"CMDB","endpoint":"CMDB","parent":null,"children":[2]},
+        {"id":2, "title":"Серверы и ПК", "endpoint":"server_pc","parent":1,"children":[]}
+    ],
+    "url":"https://mocki.io/v1/6dfb1b88-f2bd-49d4-858d-ffb7ebe5c287"
+}

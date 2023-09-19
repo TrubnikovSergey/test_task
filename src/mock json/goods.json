@@ -1,0 +1,28 @@
+{
+    "goods":[
+        {"id":1,"category":2,"title":"Сервер 1","price":1000,"type":"A","location":"Магазин 1","availability":true},
+        {"id":2,"category":2,"title":"Сервер 2","price":1300,"type":"B","location":"Магазин 3","availability":false},
+        {"id":3,"category":2,"title":"Сервер 3","price":3000,"type":"A","location":"Магазин 1","availability":false},
+        {"id":4,"category":2,"title":"Сервер 4","price":600,"type":"C","location":"Магазин 2","availability":true},
+        {"id":5,"category":2,"title":"Сервер 5","price":5600,"type":"A","location":"Магазин 2","availability":false},
+        {"id":6,"category":2,"title":"Сервер 6","price":4300,"type":"D","location":"Магазин 1","availability":true},
+
+        {"id":7,"category":2,"title":"Клавиатура 1","price":230,"type":"A","location":"Магазин 1","availability":true},
+        {"id":8,"category":2,"title":"Клавиатура 2","price":300,"type":"B","location":"Магазин 3","availability":false},
+        {"id":9,"category":2,"title":"Клавиатура 3","price":500,"type":"A","location":"Магазин 1","availability":false},
+        {"id":10,"category":2,"title":"Клавиатура 4","price":1000,"type":"C","location":"Магазин 2","availability":true},
+        {"id":11,"category":2,"title":"Клавиатура 5","price":1300,"type":"A","location":"Магазин 2","availability":false},
+        {"id":12,"category":2,"title":"Клавиатура 6","price":450,"type":"D","location":"Магазин 1","availability":true},
+
+        {"id":13,"category":2,"title":"Мышь 1","price":234,"type":"A","location":"Магазин 1","availability":true},
+        {"id":14,"category":2,"title":"Мышь 2","price":433,"type":"B","location":"Магазин 3","availability":false},
+        {"id":15,"category":2,"title":"Мышь 3","price":760,"type":"A","location":"Магазин 1","availability":false},
+        {"id":16,"category":2,"title":"Мышь 4","price":200,"type":"C","location":"Магазин 2","availability":true},
+        {"id":17,"category":2,"title":"Мышь 5","price":1200,"type":"A","location":"Магазин 2","availability":false},
+        {"id":18,"category":2,"title":"Мышь 6","price":700,"type":"D","location":"Магазин 1","availability":true},
+        {"id":19,"category":2,"title":"Коврик 6","price":20,"type":"D","location":"Магазин 1","availability":true},
+        {"id":20,"category":2,"title":"Коврик 6","price":100,"type":"D","location":"Магазин 1","availability":true}
+    ],
+    "url":"https://mocki.io/v1/80a682b7-aab6-4a12-a4d9-57f9e3dfb3cd"
+}
+
