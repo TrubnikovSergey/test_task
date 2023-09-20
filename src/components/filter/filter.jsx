@@ -33,6 +33,7 @@ const Filter = ({ value = {}, onChangeFilter, onResetFilter }) => {
   const handleCancel = () => {
     setDataFilter({});
     onResetFilter();
+    onChangeFilter({});
   };
 
   return (

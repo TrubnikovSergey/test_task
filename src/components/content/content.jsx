@@ -36,8 +36,6 @@ const Content = () => {
   const paramsRef = useRef(initParamsRef(searchParams));
   const { page, query, tags, type } = paramsRef.current;
 
-  // console.log("{ page, query, tags, type }", { page, query, tags, type });
-
   useEffect(() => {
     fetch("https://mocki.io/v1/a290dd31-2574-426c-9c05-c36fa935fc7b")
       .then((respons) => respons.json())
@@ -52,12 +50,18 @@ const Content = () => {
       .then((respons) => respons.json())
       .then((value) => {
         let newGoods = value.goods;
-        const { query, page } = paramsRef.current;
+        const { query, page, type, tags } = paramsRef.current;
 
         if (query) {
           const reg = new RegExp(`${query}`, "ig");
 
           newGoods = value.goods.filter((item) => item.title.search(reg) >= 0);
+        }
+        if (type) {
+          newGoods = newGoods.filter((item) => item.type === type);
+        }
+        if (tags) {
+          newGoods = newGoods.filter((item) => item.tags.includes(tags));
         }
         if (page) {
           const calcPage = Math.ceil(newGoods.length / sizePage);
@@ -66,7 +70,7 @@ const Content = () => {
           totalCountGoodsRef.current = newGoods.length;
           newGoods = newGoods.filter((item, idx) => idx >= (minPage - 1) * sizePage && idx < minPage * sizePage);
 
-          if (calcPage < page) {
+          if (minPage > 0) {
             paramsRef.current.page = minPage;
             setSearchParams(paramsRef.current);
           }
@@ -94,7 +98,7 @@ const Content = () => {
     delete paramsRef.current.tags;
     delete paramsRef.current.type;
 
-    // paramsRef.current = { ...paramsRef.current};
+    paramsRef.current = { ...paramsRef.current };
 
     setSearchParams(paramsRef.current);
   };
