@@ -2,48 +2,51 @@ import { Button, Popconfirm } from "antd";
 import { useState } from "react";
 import FilterForm from "./filterForm";
 
-const Filter = ({ initFilter = { type: "", tags: [] } }) => {
-  const [open, setOpen] = useState(false);
+const Filter = ({ value = {}, onChangeFilter, onResetFilter }) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [dataFilter, setDataFilter] = useState({ type: "", tags: [] });
+  const [dataFilter, setDataFilter] = useState(value);
 
   const handleChangeForm = (e) => {
     const { name, value } = e.target;
-    setDataFilter((prev) => ({ ...prev, [name]: name === "tags" ? [value] : value }));
-  };
 
-  const showPopconfirm = () => {
-    setOpen(true);
+    if (!value) {
+      setDataFilter((prev) => delete { ...prev }[name]);
+    } else {
+      setDataFilter((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleOk = () => {
     setConfirmLoading(true);
+    setConfirmLoading(false);
 
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
+    const respons = {};
+    if (dataFilter.tags) {
+      respons.tags = dataFilter.tags;
+    }
+    if (dataFilter.type) {
+      respons.type = dataFilter.type;
+    }
+    onChangeFilter(respons);
   };
 
   const handleCancel = () => {
-    setOpen(false);
-    setDataFilter(initFilter);
+    setDataFilter({});
+    onResetFilter();
   };
 
   return (
     <Popconfirm
       description={<FilterForm dataForm={dataFilter} onChangeForm={handleChangeForm} />}
       icon=""
+      title="Title"
       cancelText="Сбросить"
       okText="Применить"
-      open={open}
       onConfirm={handleOk}
       okButtonProps={{ loading: confirmLoading }}
       onCancel={handleCancel}
     >
-      <Button type="primary" onClick={showPopconfirm}>
-        Filter
-      </Button>
+      <Button type="primary">Filter</Button>
     </Popconfirm>
   );
 };

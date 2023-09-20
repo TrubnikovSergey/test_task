@@ -9,12 +9,23 @@ import { useEffect } from "react";
 import { useRef } from "react";
 
 function initParamsRef(searchParams) {
-  if (searchParams.size > 0)
-    return {
-      query: searchParams.get("query") || "",
-      page: Number(searchParams.get("page")) || 1,
-    };
-  else return {};
+  const result = { page: 1 };
+  if (searchParams.size > 0) {
+    if (searchParams.has("query")) {
+      result.query = searchParams.get("query");
+    }
+    if (searchParams.has("page")) {
+      result.page = Number(searchParams.get("page"));
+    }
+    if (searchParams.has("tags")) {
+      result.tags = searchParams.get("tags");
+    }
+    if (searchParams.has("type")) {
+      result.type = searchParams.get("type");
+    }
+  }
+
+  return result;
 }
 
 const Content = () => {
@@ -24,6 +35,8 @@ const Content = () => {
   const sizePage = 10;
   const paramsRef = useRef(initParamsRef(searchParams));
   const { page, query, tags, type } = paramsRef.current;
+
+  // console.log("{ page, query, tags, type }", { page, query, tags, type });
 
   useEffect(() => {
     fetch("https://mocki.io/v1/a290dd31-2574-426c-9c05-c36fa935fc7b")
@@ -43,7 +56,7 @@ const Content = () => {
 
         if (query) {
           const reg = new RegExp(`${query}`, "ig");
-          console.dir(reg);
+
           newGoods = value.goods.filter((item) => item.title.search(reg) >= 0);
         }
         if (page) {
@@ -68,6 +81,24 @@ const Content = () => {
     setSearchParams(paramsRef.current);
   };
 
+  const handleChangeFilter = (data) => {
+    if (data.tags) {
+      paramsRef.current = { ...paramsRef.current, tags: data.tags };
+    }
+    if (data.type) {
+      paramsRef.current = { ...paramsRef.current, type: data.type };
+    }
+    setSearchParams(paramsRef.current);
+  };
+  const handleResetFilter = () => {
+    delete paramsRef.current.tags;
+    delete paramsRef.current.type;
+
+    // paramsRef.current = { ...paramsRef.current};
+
+    setSearchParams(paramsRef.current);
+  };
+
   const handleChangeSearch = (query) => {
     paramsRef.current = { ...paramsRef.current, query: query };
     if (!query) {
@@ -82,7 +113,7 @@ const Content = () => {
     <div className="content-wrapper">
       <div className="toolbar">
         <Search query={query || ""} onChange={handleChangeSearch} />
-        <Filter />
+        <Filter value={{ type, tags }} onChangeFilter={handleChangeFilter} onResetFilter={handleResetFilter} />
       </div>
       {goods.length > 0 && <TableComponent rows={goods} />}
       <PaginationComponent currentPage={page || 1} total={totalCountGoodsRef.current} onChange={handleChangePaginate} />
