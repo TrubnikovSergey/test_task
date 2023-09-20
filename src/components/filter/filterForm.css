@@ -1,0 +1,23 @@
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+select{
+    width: 150px;
+
+}
+
+.type{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tags{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

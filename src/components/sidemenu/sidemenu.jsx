@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import "./sidemenu.css";
+import { useNavigate } from "react-router-dom";
 
 const getMenu = (data) => {
   const menu = data
@@ -30,9 +31,11 @@ const getMenu = (data) => {
 
 const SideMenu = () => {
   const [menu, setMenu] = useState([]);
+  const navigate = useNavigate();
 
   const handleSelect = (e) => {
-    console.log(e);
+    const path = [...e.keyPath].reverse().join("/").toLowerCase();
+    navigate(`/${path}`);
   };
 
   useEffect(() => {
@@ -43,7 +46,7 @@ const SideMenu = () => {
       });
   }, []);
 
-  return <Menu className="menu-wrapper" mode="inline" items={menu} onSelect={handleSelect} />;
+  return <Menu className="menu-wrapper" mode="inline" items={menu} onClick={handleSelect} />;
 };
 
 export default SideMenu;
